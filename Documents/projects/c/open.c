@@ -4,6 +4,7 @@
   #include<stdlib.h>
   #include<errno.h>
   #include<unistd.h>
+  #include<stdio.h>
   
 int main()
 {
@@ -12,14 +13,15 @@ int main()
     if(fd==-1)
     {
         perror("file can not be oppened");
-        error(EXIT_FAILURE);
+        printf("%d\n",errno);
+        exit(EXIT_FAILURE);
     }
     write(fd,"hello world\n",12);
-   // x=close(fd);
-    if(x!=0)
+    x=close(fd);
+    if(x==-1)
     {
         perror("file can not be closed");
-        error(EXIT_FAILURE);
+        exit(EXIT_FAILURE);
     }
 
     return 0;
